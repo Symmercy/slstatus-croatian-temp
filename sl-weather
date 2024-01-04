@@ -1,0 +1,12 @@
+#!/bin/bash
+
+wget https://vrijeme.hr/hrvatska1_n.xml
+touch data.txt
+grep -A 12 "#PLACEHOLDER#" hrvatska1_n.xml >> data.txt
+sed -i -e '1,4d' -e '6,13d' data.txt
+sed -i -e 's/<Temp>//g' -e 's/<\/Temp>//g' data.txt
+sed -i 's/ //g' data.txt
+sed -i '1s/$/ C°/' data.txt
+cat data.txt
+rm hrvatska1_n.xml
+rm data.txt
